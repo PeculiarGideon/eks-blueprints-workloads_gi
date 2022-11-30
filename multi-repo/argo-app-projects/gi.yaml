@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: general-insurance
+  namespace: argocd
+spec:
+  destinations:
+    - namespace: general-insurance
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - git@github.com:PeculiarGideon/gi.git
