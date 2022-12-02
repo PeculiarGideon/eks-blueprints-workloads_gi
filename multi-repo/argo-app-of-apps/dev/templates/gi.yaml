@@ -9,7 +9,7 @@ metadata:
 spec:
   destinations:
     - namespace: general-insurance
-      server: https://kubernetes.default.svc
+      server: '*'
   sourceRepos:
     - {{ .Values.spec.apps.generalInsurance.repoURL }}
 ---
