@@ -39,4 +39,4 @@ spec:
     automated:
       prune: true
     syncOptions:
-      - CreateNamespace=true # Created with IaC - # https://github.com/argoproj/argo-cd/issues/7799
+      - CreateNamespace=false  # Created with IaC - # https://github.com/argoproj/argo-cd/issues/7799
