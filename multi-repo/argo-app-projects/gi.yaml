@@ -8,4 +8,4 @@ spec:
     - namespace: general-insurance
       server: https://kubernetes.default.svc
   sourceRepos:
-    - git@github.com:PeculiarGideon/gi.git
+    - git@github.com:PeculiarGideon/eks-blueprints-workloads_gi.git 
