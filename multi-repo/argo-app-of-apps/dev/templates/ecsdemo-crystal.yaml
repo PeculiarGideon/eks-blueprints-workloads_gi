@@ -1,4 +1,4 @@
-    apiVersion: argoproj.io/v1alpha1
+apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: ecsdemo-crystal
@@ -39,4 +39,4 @@ spec:
     automated:
       prune: true
     syncOptions:
-      - CreateNamespace=false # Created with IaC - # https://github.com/argoproj/argo-cd/issues/7799
+      - CreateNamespace=true # Created with IaC - # https://github.com/argoproj/argo-cd/issues/7799
