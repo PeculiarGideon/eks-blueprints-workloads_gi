@@ -25,7 +25,7 @@ metadata:
 spec:
   project: general-insurance
   destination:
-    namespace: default
+    namespace: general-insurance
     server: {{ .Values.spec.destination.server }}
   source:
     repoURL: {{ .Values.spec.apps.generalInsurance.repoURL }}
