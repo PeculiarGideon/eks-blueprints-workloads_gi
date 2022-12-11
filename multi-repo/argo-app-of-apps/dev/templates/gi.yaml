@@ -24,6 +24,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
   annotations:
     argocd-image-updater.argoproj.io/image-list: mastsurfeit/gi:latest
+    argocd-image-updater.argoproj.io/myimage.update-strategy: digest
 
 spec:
   project: general-insurance
