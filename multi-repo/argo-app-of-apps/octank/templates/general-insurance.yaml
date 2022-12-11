@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: general-insurance
+  namespace: argocd
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destinations:
+    - namespace: general-insurance
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - {{ .Values.spec.apps.generalInsurance.repoURL }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: general-insurance
+  namespace: argocd
+  labels:
+    {{- toYaml .Values.labels | nindent 4 }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: mastsurfeit/gi:latest
+    argocd-image-updater.argoproj.io/myimage.update-strategy: digest
+
+spec:
+  project: general-insurance
+  destination:
+    namespace: general-insurance
+    server: {{ .Values.spec.destination.server }}
+  source:
+    repoURL: {{ .Values.spec.apps.generalInsurance.repoURL }}
+    targetRevision: {{ .Values.spec.apps.generalInsurance.targetRevision }}
+    path: {{ .Values.spec.apps.generalInsurance.path }}
+    helm:
+      values: |-
+      {{ toYaml .Values.spec.apps.generalInsurance| nindent 8 }}
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true  # Created with IaC - https://github.com/argoproj/argo-cd/issues/7799
