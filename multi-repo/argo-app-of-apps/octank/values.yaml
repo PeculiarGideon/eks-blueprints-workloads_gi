@@ -1,0 +1,26 @@
+labels:
+  env: dev
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+# All helm parameters can be sent by IaC code (Terraform or CDK)    
+  apps:
+    
+    generalInsurance:
+      #repoURL: git@github.com:aws-containers/ecsdemo-frontend.git
+      repoURL: https://github.com/PeculiarGideon/gi.git       
+      targetRevision: main
+      path: kubernetes/helm/general-insurance
+      ingress:
+        enabled: true
+        annotations:
+          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+          alb.ingress.kubernetes.io/scheme: internet-facing
+          alb.ingress.kubernetes.io/tags: Environment=dev,Team=general-insurance
+          alb.ingress.kubernetes.io/target-type: ip
+        className: alb
+        hosts:
+          - paths:
+              - path: /hello
+                pathType: Prefix               
+    
